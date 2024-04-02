@@ -9,10 +9,10 @@ CREATE OR REPLACE PROCEDURE InsertFilm(
     IN p_release_year INTEGER,
     IN p_language_id INTEGER,
     IN p_rental_duration INTEGER,
-    IN p_rental_rate INTEGER,
+    IN p_rental_rate DECIMAL(5, 2),
     IN p_length INTEGER,
-    IN p_replace_cost INTEGER,
-    IN p_rating VARCHAR
+    IN p_replace_cost DECIMAL(5, 2),
+    IN p_rating VARCHAR(10)
 )
 LANGUAGE plpgsql
 AS $$
@@ -21,6 +21,19 @@ BEGIN
     VALUES (p_title, p_description, p_release_year, p_language_id, p_rental_duration, p_rental_rate, p_length, p_replace_cost, p_rating, CURRENT_TIMESTAMP);
 END;
 $$;
+
+CALL InsertFilm(
+	'Cloud Atlas',
+	'a very detailed movie for sci-fi fans that has gotten many confused',
+	2012,
+	1,
+	14,
+	5.99,
+	172,
+	29.99,
+	'PG-13'
+);
+
 
 
 -- 2. Create a Stored Function that will take in a category_id and return the number of films in that category
